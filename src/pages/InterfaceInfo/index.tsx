@@ -42,7 +42,7 @@ const Index: React.FC = () => {
   };
 
   useEffect(() => {
-    loadData();
+    loadData()
   }, []);
 
   const onFinish = async (values: any) => {

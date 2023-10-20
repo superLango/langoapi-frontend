@@ -106,11 +106,14 @@ const Login: React.FC = () => {
         ...values,
       });
       if (res.data){
-        const urlParams = new URL(window.location.href).searchParams;
-        history.push(urlParams.get('redirect') || '/');
+        message.success('登录成功！');
         setInitialState({
           loginUser: res.data,
         });
+        setTimeout(()=>{
+          const urlParams = new URL(window.location.href).searchParams;
+          history.push(urlParams.get('redirect') || '/');
+        },100);
         return;
       }
       // 如果失败去设置用户错误信息
@@ -141,12 +144,12 @@ const Login: React.FC = () => {
             maxWidth: '75vw',
           }}
           logo={<img alt="logo" src="/logo.svg" />}
-          title="Ant Design"
-          subTitle={'Ant Design 是西湖区最具影响力的 Web 设计规范'}
+          title="LangoAPI 开放平台"
+          subTitle={'免费在线 api 开放调用平台'}
           initialValues={{
             autoLogin: true,
           }}
-          actions={['其他登录方式 :', <ActionIcons key="icons" />]}
+          // actions={['其他登录方式 :', <ActionIcons key="icons" />]}
           onFinish={async (values) => {
             await handleSubmit(values as API.UserLoginRequest);
           }}
@@ -160,10 +163,10 @@ const Login: React.FC = () => {
                 key: 'account',
                 label: '账户密码登录',
               },
-              {
-                key: 'mobile',
-                label: '手机号登录',
-              },
+              // {
+              //   key: 'mobile',
+              //   label: '手机号登录',
+              // },
             ]}
           />
 
@@ -178,7 +181,7 @@ const Login: React.FC = () => {
                   size: 'large',
                   prefix: <UserOutlined />,
                 }}
-                placeholder={'用户名: admin or user'}
+                placeholder={'用户名: lango'}
                 rules={[
                   {
                     required: true,
@@ -192,7 +195,7 @@ const Login: React.FC = () => {
                   size: 'large',
                   prefix: <LockOutlined />,
                 }}
-                placeholder={'密码: ant.design'}
+                placeholder={'密码: 12345678'}
                 rules={[
                   {
                     required: true,
@@ -203,7 +206,7 @@ const Login: React.FC = () => {
             </>
           )}
 
-          {status === 'error' && loginType === 'mobile' && <LoginMessage content="验证码错误" />}
+         {/* {status === 'error' && loginType === 'mobile' && <LoginMessage content="验证码错误" />}
           {type === 'mobile' && (
             <>
               <ProFormText
@@ -257,7 +260,7 @@ const Login: React.FC = () => {
                 }}
               />
             </>
-          )}
+          )}*/}
           <div
             style={{
               marginBottom: 24,
@@ -266,13 +269,13 @@ const Login: React.FC = () => {
             <ProFormCheckbox noStyle name="autoLogin">
               自动登录
             </ProFormCheckbox>
-            <a
+            {/*<a
               style={{
                 float: 'right',
               }}
             >
               忘记密码 ?
-            </a>
+            </a>*/}
           </div>
         </LoginForm>
       </div>

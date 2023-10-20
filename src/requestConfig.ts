@@ -1,6 +1,6 @@
 ﻿import type { RequestOptions } from '@@/plugin-request/request';
 import type { RequestConfig } from '@umijs/max';
-import { message, notification } from 'antd';
+import isDev from "ahooks/lib/utils/isDev";
 
 // 错误处理方案： 错误类型
 enum ErrorShowType {
@@ -10,6 +10,7 @@ enum ErrorShowType {
   NOTIFICATION = 3,
   REDIRECT = 9,
 }
+
 // 与后端约定的响应数据格式
 interface ResponseStructure {
   success: boolean;
@@ -26,6 +27,7 @@ interface ResponseStructure {
  */
 export const requestConfig: RequestConfig = {
   baseURL: 'http://localhost:7529',
+  // baseURL: 'http://www.**.com:7529' || 'http://**.**.**.**:7529',
   withCredentials: true,
   // 请求拦截器
   requestInterceptors: [
@@ -41,8 +43,8 @@ export const requestConfig: RequestConfig = {
     (response) => {
       // 拦截响应数据，进行个性化处理
       const { data } = response as unknown as ResponseStructure;
-      console.log('data',data);
-      if (data.code != 0){
+      console.log('data', data);
+      if (data.code != 0) {
         throw new Error(data.message);
       }
       return response;

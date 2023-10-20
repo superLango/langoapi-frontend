@@ -136,4 +136,6 @@ export default defineConfig({
     strategy: 'normal',
   },
   requestRecord: {},
+  // exportStatic: {},
+  // history: {type: "hash"}
 });
